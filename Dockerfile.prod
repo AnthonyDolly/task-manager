@@ -1,0 +1,32 @@
+# -------- Build Stage --------
+FROM node:lts-alpine AS builder
+
+WORKDIR /app
+
+# Instala todas las dependencias (incl. dev) y compila TypeScript
+COPY package*.json ./
+RUN npm ci
+
+COPY tsconfig*.json ./
+COPY src ./src
+
+RUN npm run build
+
+# -------- Production Stage --------
+FROM node:lts-alpine
+
+WORKDIR /app
+
+# Copia solo dependencias de producción
+COPY package*.json ./
+RUN npm ci --only=production --ignore-scripts
+
+# Copia artefactos compilados
+COPY --from=builder /app/dist ./dist
+
+# Variables por defecto
+ENV PORT=3000
+EXPOSE 3000
+
+# Ejecuta la aplicación
+CMD ["node", "dist/server.js"] 

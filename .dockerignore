@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+dist
+Dockerfile
+docker-compose.yml
+.git
+.gitignore
+.eslintrc.cjs
+.prettierrc
+.husky
+lint-staged.config.js
+logs 
