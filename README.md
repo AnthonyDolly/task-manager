@@ -41,20 +41,9 @@ docker compose up -d    # compila imagen y levanta mongodb, redis y app
 docker logs -f task-manager-app
 ```
 
-### Variables de entorno (resumen)
+### Variables de entorno
 
-| Variable | Descripción | Default |
-|----------|-------------|---------|
-| `PORT` | Puerto API | 3000 |
-| `MONGODB_URI` | Cadena conexión Mongo | *requerida* |
-| `JWT_SECRET` | Clave secreta JWT | *requerida* |
-| `REDIS_HOST` `REDIS_PORT` | Datos de Redis | redis / 6379 |
-| `CORS_ORIGIN` | Origen permitido | `*` |
-| `RATE_LIMIT_*` | Ventana y límite global | 15 min / 100 |
-| `LOGIN_*` | Límite login | 15 min / 5 |
-| `LOG_*` | Dir, nombre y nivel de log | logs/app.log |
-
-Consulta `.env.example` para la lista completa.
+Debes configurar **todas** las variables definidas en `.env.example` antes de ejecutar la aplicación (puerto, MongoDB, Redis, JWT, límites, etc.).
 
 ## Endpoints principales
 
