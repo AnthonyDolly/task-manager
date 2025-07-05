@@ -33,8 +33,10 @@ const start = async () => {
   await connectDB(MONGODB_URI);
   await connectRedis();
 
-  // Seed database if empty
-  await seedDatabase();
+  // Seed database con datos de ejemplo solo en desarrollo o test
+  if (env.NODE_ENV !== 'production') {
+    await seedDatabase();
+  }
 
   const httpServer = http.createServer(app);
   const io = new IOServer(httpServer, {
